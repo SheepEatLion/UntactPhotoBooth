@@ -18,8 +18,8 @@ public class DetectFaceService {
     public void faceAPI(String clientIdReal, String clientSecretReal){
 
         StringBuffer reqStr = new StringBuffer();
-        String clientId = clientIdReal;//애플리케이션 클라이언트 아이디값";
-        String clientSecret = clientSecretReal;//애플리케이션 클라이언트 시크릿값";
+        String clientId = clientIdReal;//애플리케이션 클라이언트 아이디;
+        String clientSecret = clientSecretReal;//애플리케이션 클라이언트 시크릿;
 
         try {
             String paramName = "image"; // 파라미터명은 image로 지정
@@ -79,7 +79,7 @@ public class DetectFaceService {
                     response.append(inputLine);
                 }
                 br.close();
-                System.out.println(response.toString());
+                System.out.println("여기서 출력:" + response.toString());
             } else {
                 System.out.println("error !!!");
             }
