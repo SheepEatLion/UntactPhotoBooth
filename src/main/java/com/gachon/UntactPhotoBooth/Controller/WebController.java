@@ -20,8 +20,8 @@ public class WebController {
         }
     }
 
-    @GetMapping("/test")
-    public void getTest(@Value("${clientId}") String clientId){
-        System.out.println(clientId);
+    @GetMapping("/error")
+    public String getError(){
+        return "error";
     }
 }

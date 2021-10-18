@@ -6,7 +6,10 @@ import java.io.*;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
+
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import javax.imageio.ImageIO;
@@ -15,7 +18,14 @@ import javax.imageio.ImageIO;
 @Service
 public class DetectFaceService {
 
-    public void faceAPI(String clientIdReal, String clientSecretReal){
+    @Value("${clientId}")
+    private String clientIdReal;
+
+    @Value("${clientSecret}")
+    private String clientSecretReal;
+
+    public String faceAPI(ArrayList<String> imgUrls){
+
 
         StringBuffer reqStr = new StringBuffer();
         String clientId = clientIdReal;//애플리케이션 클라이언트 아이디;
@@ -23,7 +33,7 @@ public class DetectFaceService {
 
         try {
             String paramName = "image"; // 파라미터명은 image로 지정
-            String imgUrl = "https://untactphotobooth.s3.ap-northeast-2.amazonaws.com/static/young-asian-girl-portrait-isolated_53876-70968.jpg";
+            String imgUrl = imgUrls.get(0);
             String imgFilePath = "src/main/resources/static/test_image.jpg";
             String imgFormat = "jpg";
 
@@ -31,7 +41,7 @@ public class DetectFaceService {
             System.out.println("저장완료");
             //String imgFile =
             File uploadFile = new File(imgFilePath);
-            //String apiURL = "https://openapi.naver.com/v1/vision/celebrity"; // 유명인 얼굴 인식
+
             String apiURL = "https://openapi.naver.com/v1/vision/face"; // 얼굴 감지
             URL url = new URL(apiURL);
             HttpURLConnection con = (HttpURLConnection)url.openConnection();
@@ -80,12 +90,15 @@ public class DetectFaceService {
                 }
                 br.close();
                 System.out.println("여기서 출력:" + response.toString());
+                return response.toString();
             } else {
                 System.out.println("error !!!");
+                return null;
             }
         } catch (Exception e) {
             System.out.println(e);
         }
+        return null;
     }
 
     public void getImageFromUrl(String imgUrl, String imgFilePath, String imgFormat){

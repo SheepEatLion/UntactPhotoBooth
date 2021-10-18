@@ -25,14 +25,14 @@ public class S3Service {
     public String bucket;  // S3 버킷 이름
 
     // 이미지 업로드 code 로 구분 posts, user
-    public ArrayList<String> uploadImageToS3(MultipartFile[] files, String code){
+    public ArrayList<String> uploadImageToS3(MultipartFile[] files){
         ObjectMetadata meta = new ObjectMetadata();
         ArrayList<String> resultUrls = new ArrayList<>();
 
         for (MultipartFile file : files) {
             meta.setContentType(MediaType.IMAGE_PNG_VALUE);
             meta.setContentLength(file.getSize());
-            String randomFileName = code + "/" + UUID.randomUUID() + file.getOriginalFilename();
+            String randomFileName = "static/" +UUID.randomUUID() + file.getOriginalFilename();
             try {
                 amazonS3Client.putObject(
                         new PutObjectRequest(bucket, randomFileName, file.getInputStream(), meta)
