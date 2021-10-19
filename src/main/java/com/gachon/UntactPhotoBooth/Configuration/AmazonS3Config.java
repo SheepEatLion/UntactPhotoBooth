@@ -8,6 +8,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * AWS 설정 클래스
+ */
+
 @Configuration
 public class AmazonS3Config {
     @Value("${cloud.aws.credentials.access-key}")

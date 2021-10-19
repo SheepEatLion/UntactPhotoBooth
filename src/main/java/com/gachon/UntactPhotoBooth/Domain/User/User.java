@@ -6,6 +6,11 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * 유저 엔티티
+ *
+ */
+
 @Getter
 @NoArgsConstructor
 @Entity

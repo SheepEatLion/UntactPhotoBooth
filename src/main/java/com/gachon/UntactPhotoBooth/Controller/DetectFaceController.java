@@ -17,6 +17,12 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.ArrayList;
 
+
+/**
+ * 얼굴분석 컨트롤러 ( 클라 <--> 네이버 클로바 )
+ * AWS S3 서비스 의존 추가
+ */
+
 @Slf4j
 @RequiredArgsConstructor
 @Controller

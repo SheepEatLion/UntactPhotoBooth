@@ -3,6 +3,10 @@ package com.gachon.UntactPhotoBooth.Domain.User;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * 유저 역할 이넘클래스
+ */
+
 @Getter
 @RequiredArgsConstructor
 public enum Role {

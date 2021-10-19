@@ -1,7 +1,5 @@
 package com.gachon.UntactPhotoBooth.Controller;
 
-
-
 import com.gachon.UntactPhotoBooth.Configuration.Oauth.LoginUser;
 import com.gachon.UntactPhotoBooth.Configuration.Oauth.dto.SessionUser;
 import lombok.RequiredArgsConstructor;
@@ -11,6 +9,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpSession;
+
+/**
+ * 웹 컨트롤러 : 주소 매핑 리턴할때 사용
+ */
 
 @RequiredArgsConstructor
 @Controller

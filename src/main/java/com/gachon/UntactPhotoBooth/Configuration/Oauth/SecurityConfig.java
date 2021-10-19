@@ -6,6 +6,10 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 
+/**
+ * 보안 설정 클래스 (antMatchers)
+ */
+
 @RequiredArgsConstructor
 @EnableWebSecurity  // 스프링 시큐리티 설정 활성화
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
