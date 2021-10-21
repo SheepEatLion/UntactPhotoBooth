@@ -1,5 +1,7 @@
 package com.gachon.UntactPhotoBooth.Controller;
 
+import com.gachon.UntactPhotoBooth.Configuration.Oauth.LoginUser;
+import com.gachon.UntactPhotoBooth.Configuration.Oauth.dto.SessionUser;
 import com.gachon.UntactPhotoBooth.Service.DetectFaceService;
 import com.gachon.UntactPhotoBooth.Service.S3Service;
 import lombok.RequiredArgsConstructor;
@@ -32,7 +34,7 @@ public class DetectFaceController {
     private final S3Service s3Service;
 
     @PostMapping("/face")
-    public String detectFace(Model model, @RequestParam("files") MultipartFile[] files) throws JSONException {
+    public String detectFace(Model model, @RequestParam("files") MultipartFile[] files, @LoginUser SessionUser user) throws JSONException {
         ArrayList<String> imgUrl = s3Service.uploadImageToS3(files);
         String result = detectFaceService.faceAPI(imgUrl);
         JSONObject jsonObject = new JSONObject(result);
@@ -47,6 +49,9 @@ public class DetectFaceController {
 
         imgObject.put("image", imgUrl.get(0));
 
+        if(user != null){ // @LoginUser 를 통해 이제 어느 컨트롤러에서도 세션 정보를 가져올 수 있게 되었다.
+            model.addAttribute("userEmail", user.getEmail()); // 세션에 값이 있을때만 유저 이름이 보이게 하고 그 외엔 로그인 버튼
+        }
 
         model.addAttribute("gender", gender);
         model.addAttribute("age", age);

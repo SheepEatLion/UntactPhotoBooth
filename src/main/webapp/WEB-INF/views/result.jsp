@@ -9,6 +9,7 @@
         <meta name="author" content="" />
         <title>result pages</title>
         <!-- Favicon-->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
@@ -60,6 +61,8 @@
                             var pose = JSON.parse(JSON.stringify(${pose}));
                             var gender = JSON.parse(JSON.stringify(${gender}));
                             var imgUrl = JSON.parse(JSON.stringify(${image}));
+                            var email = '${userEmail}';
+                            var result_headline;
 
                             console.log(imgUrl);
 
@@ -69,22 +72,31 @@
 
                             if(emotion.value == "neutral"){
                                 head_text.append("무표정에 가까워요. 약간의 미소와 함께 다시 찍어보는게 어떨까요?");
+                                result_headline = "무표정에 가까워요:(";
                             }else if(emotion.value == "angry"){
                                 head_text.append("화가 나신 모양이에요. 웃는 얼굴로 다시 찍어볼까요?")
+                                result_headline = "화가 나신 모양이에요.";
                             }else if(emotion.value == "disgust"){
                                 head_text.append("무언가 역겨운 것을 보셨나요? 증명사진으로 쓰기엔 어려울 것 같아요.")
+                                result_headline = "무언가 역겨운 것을 보셨나요?";
                             }else if(emotion.value == "fear"){
                                 head_text.append("두려워하는 표정이에요. 다시 한번 웃는 얼굴로 찍어볼까요?");
+                                result_headline = "두려워하는 표정이에요:D";
                             }else if(emotion.value == "laugh"){
                                 head_text.append("비웃는 듯한 표정이에요. 다시 찍어볼까요?");
+                                result_headline = "비웃는 듯한 표정이에요.";
                             }else if(emotion.value == "sad"){
-                                head_text.append("울적한 표정이에요.. 슬픈 일이 있으셨나요?");
+                                head_text.append("슬픈 표정이네요.. 안좋은 일이 있으셨나요?");
+                                result_headline = "슬픈 표정이네요..";
                             }else if(emotion.value == "surprise"){
                                 head_text.append("무언가에 놀라셨군요?! 아주 놀란 표정이에요.");
+                                result_headline = "무언가에 놀라셨군요?!";
                             }else if(emotion.value == "smile"){
                                 head_text.append("환하게 웃고 계시는군요!");
+                                result_headline = "웃는 모습이 보기 좋아요!";
                             }else{
                                 head_text.append("누군가와 대화하는 듯한 모습이에요. 아무래도 증명사진으로는 어렵겠죠?");
+                                result_headline = "누군가와 대화중이군요!";
                             }
 
                             var PhotoMood1 = "나이는 약 " + age.value + "살로 보이고";
@@ -129,64 +141,23 @@
                                 }
                             });
 
-
-                            /*
-                            const likelihood = {"undefined": "no", "VERY_UNLIKELY": "0%", "UNLIKELY": "10%", "POSSIBLE": "30%", "LIKELY": "70%", "VERY_LIKELY": "100%"};
-
-                            var joy = urlParams.get("j");
-                            var sorrow = urlParams.get("s");
-                            var anger = urlParams.get("a");
-                            var surprise = urlParams.get("p");
-                            var file_name = urlParams.get("n");
-                            var PhotoMood1 = "웃는 표정일 확률은 " + likelihood[joy]
-                            var PhotoMood2 = "슬픈 표정일 확률은 " + likelihood[sorrow]
-                            var PhotoMood3 = "화난 표정일 확률은 " + likelihood[anger]
-                            var PhotoMood4 = "놀란 표정일 확률은 " + likelihood[surprise];
-                            // image source from URL
-                            var img = document.getElementById("result_image");
-                            img.setAttribute("src", "https://storage.googleapis.com/untactphotobooth/" + file_name); // s3로 수정 필요
-                            // text msg setting
-                            var head_text = document.getElementById("head-text");
-                            console.log("result : " + likelihood[joy]);
-                            if(likelihood[joy] == "70%"){
-                                head_text.append("좋은 인상을 남길 수 있을 것 같아요!");
-                            }else if(likelihood[joy] == "100%"){
-                                head_text.append("환하게 웃고 계시는군요!")
-                            }else if(likelihood[sorrow] == "100%"){
-                                head_text.append("울적한 표정이에요.. 슬픈 일이 있으셨나요?")
-                            }else if(likelihood[anger] == "100%"){
-                                head_text.append("화가 나신 모양이에요. 웃는 얼굴로 다시 찍어볼까요?");
-                            }else if(likelihood[surprise] == "100%"){
-                                head_text.append("무언가에 놀라셨군요?! 아주 놀란 표정이에요.");
-                            }else if(likelihood[sorrow] == "70%" || likelihood[anger] == "70%" || likelihood[surprise] == "70%"){
-                                head_text.append("음, 이력서의 첫 인상으로는 어려울 것 같아요. 다시 찍어볼까요?");
-                            }else if(likelihood[joy] == "30%"){
-                                head_text.append("밝은 느낌을 주기엔 어렵겠어요. 다시 찍어보시는게 어떨까요?");
-                            }else if(likelihood[sorrow] == "30%" || likelihood[anger] == "30%" || likelihood[surprise] == "30%"){
-                                head_text.append("복잡한 감정이 느껴져요. 애매한 사진을 이력서에 올릴 순 없죠! 다시 찍어볼까요?");
-                            }else{
-                                head_text.append("무표정에 가까워요. 약간의 미소와 함께 다시 찍어보는게 어떨까요?");
-                            }
-
-
-                            var cnt = 0;
-                            var b = document.getElementById("btn-detail");
-                            b.addEventListener("click", function(){
-                                if (cnt > 0){
-                                    console.log("clicked again");
-                                }else{
-                                    var p1 = document.getElementById("detail-text-1");
-                                    var p2 = document.getElementById("detail-text-2");
-                                    var p3 = document.getElementById("detail-text-3");
-                                    var p4 = document.getElementById("detail-text-4");
-                                    p1.append(PhotoMood1);
-                                    p2.append(PhotoMood2);
-                                    p3.append(PhotoMood3);
-                                    p4.append(PhotoMood4);
-                                    cnt ++;
-                                }
+                            // 기록하기
+                            $("#btn-history").click(function(){
+                                $.ajax({
+                                  url:"/save/history",
+                                  type:"POST",
+                                  data:JSON.stringify({
+                                           uploader : email,
+                                           image: imgUrl.image,
+                                           result: result_headline
+                                       }),
+                                  contentType:"application/json; charset=utf-8",
+                                  dataType:"json",
+                                })
                             });
-                            */
+
+
+
                         </script>
                     </div>
                 </div>
@@ -195,10 +166,9 @@
         <!-- Footer-->
         <footer class="py-5 bg-dark">
             <div class="container"><p class="m-0 text-center text-white">재촬영 또는 홈으로 돌아가시려면 상단의 메뉴를 클릭해주세요!</p></div>
+            <div class="container"><p class="m-0 text-center text-white">기록하기는 로그인 후에 이용하실 수 있습니다.</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <!--<script src="js/result_scripts.js"></script>-->
     </body>
 </html>
