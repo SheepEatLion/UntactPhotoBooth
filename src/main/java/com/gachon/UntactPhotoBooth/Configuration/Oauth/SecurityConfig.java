@@ -22,9 +22,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .headers().frameOptions().disable()  // h2-console 사용하기 위해 disable
                 .and()
                 .authorizeRequests()  // url 마다 옵션 설정을 하기 위한 시작점
-                .antMatchers("/", "/css/**", "/images/**", "/js/**", "/h2-console/**").permitAll()
-                .antMatchers("/api/v1/**").hasRole(Role.USER.name()) // 권한 관리 대상을 지정, url or http 메서드별로 관리 가능, 기본페이지는 all 했고 api 는 유저권한만 줌.
-                .anyRequest().authenticated() // anyRequest 는 설정한 url 을 제외한 나머지 모두를 의미, authenticated 를 통해 인증된 사용자만 허용
+                .antMatchers("/", "/static/css/**", "/images/**").permitAll()
+                .antMatchers("/photobooth/**").hasRole(Role.USER.name()) // 권한 관리 대상을 지정, url or http 메서드별로 관리 가능, 기본페이지는 all 했고 api 는 유저권한만 줌.
+                //.anyRequest().authenticated() // anyRequest 는 설정한 url 을 제외한 나머지 모두를 의미, authenticated 를 통해 인증된 사용자만 허용
                 .and()
                 .logout() // 로그아웃 설정 시작점
                 .logoutSuccessUrl("/") // 로그아웃 성공시 홈으로 이동하게 함.

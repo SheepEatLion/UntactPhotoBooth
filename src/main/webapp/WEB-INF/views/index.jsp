@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -31,6 +32,9 @@
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#portfolio">촬영하기</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#about">주의사항</a></li>
                         <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="#contact">문의</a></li>
+
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/mypage">마이페이지</a></li>
+                        <li class="nav-item mx-0 mx-lg-1"><a class="nav-link py-3 px-0 px-lg-3 rounded" href="/logout">로그아웃</a></li>
                     </ul>
                 </div>
             </div>
@@ -248,13 +252,25 @@
         </div>
     </body>
     <!-- 스크립트 -->
+    <script type="text/javascript">
+
+        const userName = '${userName}';
+    </script>
     <script src="https://use.fontawesome.com/releases/v5.15.3/js/all.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script>
 
-    window.addEventListener('DOMContentLoaded', event => {
+var app1 = new Vue({
+  el: '#app-3',
+  data: {
+    name: userName
+  }
+})
 
+    window.addEventListener('DOMContentLoaded', event => {
+        console.log('${userName}');
         // Navbar shrink function
         var navbarShrink = function () {
             const navbarCollapsible = document.body.querySelector('#mainNav');
