@@ -26,9 +26,11 @@
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="/">다시 촬영하기</a></li>
                         <li class="nav-item"><a class="nav-link" href="/#about">주의사항</a></li>
                         <li class="nav-item"><a class="nav-link" href="/#contact">문의</a></li>
-
                     </ul>
                 </div>
+                <button class="btn btn-outline-dark flex-shrink-0" id="btn-history" type="button">
+                    기록하기
+                </button>
             </div>
         </nav>
         <!-- Product section-->
